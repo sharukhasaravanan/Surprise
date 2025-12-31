@@ -3,7 +3,7 @@
 
   <head>
     <meta charset="UTF-8">
-    <title>index</title>
+    <title>Untitled</title>
     
 
   </head>
@@ -31,8 +31,7 @@
         html, body {
             overflow-x: hidden;
             width: 100%;
-            height: 100%;
-            position: fixed;
+            position: relative;
         }
         
         body {
@@ -40,7 +39,6 @@
             min-height: 100vh;
             font-family: 'Poppins', sans-serif;
             color: #5a5560;
-            touch-action: none;
         }
         
         .screen {
@@ -54,7 +52,7 @@
             transition: opacity 0.8s ease;
             position: relative;
             width: 100%;
-            overflow: hidden;
+            overflow-x: hidden;
         }
         
         .hidden {
@@ -145,13 +143,20 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
         
-        /* Distractions Stack - FIXED SWIPE */
+        /* Distractions Stack - MOBILE FIXED */
+        #screen2 {
+            min-height: 100vh;
+            padding: 20px 20px 100px 20px;
+            justify-content: flex-start;
+            overflow-y: auto;
+        }
+        
         .distractions-stack {
             position: relative;
             width: 90%;
             max-width: 500px;
-            height: 400px;
-            margin: 40px 0;
+            height: 320px;
+            margin: 20px 0;
             perspective: 1000px;
         }
         
@@ -171,8 +176,7 @@
             cursor: grab;
             border: 2px solid rgba(255, 255, 255, 0.8);
             z-index: 1;
-            touch-action: none;
-            -webkit-tap-highlight-color: transparent;
+            touch-action: pan-y;
         }
         
         .distraction-card:active {
@@ -186,10 +190,10 @@
         }
         
         .distraction-icon {
-            font-size: 4rem;
-            margin-bottom: 25px;
-            width: 100px;
-            height: 100px;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            width: 90px;
+            height: 90px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -197,7 +201,7 @@
         }
         
         .distraction-text {
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-family: 'Playfair Display', serif;
             font-weight: 700;
         }
@@ -244,12 +248,14 @@
             z-index: 1;
         }
         
-        /* Gift Box */
+        /* Gift Box - MOBILE FIXED */
         .gift-container {
-            margin: 50px 0;
+            margin: 40px 0 100px 0;
             opacity: 0;
             transform: scale(0.5);
             transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            z-index: 10;
         }
         
         .gift-container.revealed {
@@ -258,7 +264,7 @@
         }
         
         .gift-box {
-            font-size: 6rem;
+            font-size: 5rem;
             color: #ff85a2;
             cursor: pointer;
             animation: bounce 2s infinite, sparkle 3s infinite;
@@ -404,7 +410,7 @@
             transform: scale(1.05);
         }
         
-        /* New Year Card - YOUR MESSAGE HERE */
+        /* New Year Card - YOUR MESSAGE */
         .card-container {
             width: 90%;
             max-width: 600px;
@@ -559,17 +565,68 @@
             background: #ff85a2;
         }
         
-        /* Responsive */
+        /* Mobile Responsive Fixes */
         @media (max-width: 768px) {
             h1 { font-size: 2.8rem; }
             h2 { font-size: 2rem; }
-            p { font-size: 1.2rem; }
-            .distractions-stack { height: 350px; }
+            p { font-size: 1.2rem; margin-bottom: 20px; }
+            
+            #screen2 h2 { margin-bottom: 15px; }
+            #screen2 p { margin-bottom: 15px; }
+            
+            .distractions-stack { 
+                height: 280px; 
+                margin: 15px 0; 
+            }
+            
             .distraction-text { font-size: 1.8rem; }
-            .distraction-icon { font-size: 3rem; }
-            .photo-frame { width: 160px; height: 160px; }
-            .new-year-card { padding: 30px 20px; }
-            .card-message { font-size: 1.3rem; padding: 20px; }
+            .distraction-icon { 
+                font-size: 3rem; 
+                width: 80px; 
+                height: 80px; 
+                margin-bottom: 15px;
+            }
+            
+            .gift-container { 
+                margin: 30px 0 80px 0; 
+            }
+            
+            .gift-box { 
+                font-size: 4rem; 
+            }
+            
+            .photo-frame { 
+                width: 160px; 
+                height: 160px; 
+            }
+            
+            .new-year-card { 
+                padding: 30px 20px; 
+            }
+            
+            .card-message { 
+                font-size: 1.3rem; 
+                padding: 20px; 
+            }
+            
+            .instructions {
+                font-size: 1.1rem;
+                padding: 8px 16px;
+            }
+        }
+        
+        @media (max-height: 700px) {
+            .distractions-stack { 
+                height: 250px; 
+            }
+            
+            .gift-container { 
+                margin: 20px 0 60px 0; 
+            }
+            
+            .heart-btn {
+                font-size: 5rem;
+            }
         }
     </style>
 </head>
@@ -606,7 +663,7 @@
         <p>Something beautiful is waiting just for you...</p>
     </div>
     
-    <!-- Screen 2: Distractions Stack - FIXED SWIPE -->
+    <!-- Screen 2: Distractions Stack - MOBILE FIXED -->
     <div class="screen hidden" id="screen2">
         <h2>Swipe Away the Clouds 🌈</h2>
         <p>Swipe each card away to clear the path to your surprise</p>
@@ -681,7 +738,7 @@
         <p id="photoInstructions" style="color: #ff85a2; font-weight: 500;">Touch all the photos to continue 💕</p>
     </div>
     
-    <!-- Screen 5: New Year Card - YOUR MESSAGE HERE -->
+    <!-- Screen 5: New Year Card - YOUR MESSAGE -->
     <div class="screen hidden" id="screen5">
         <div class="card-container">
             <div class="new-year-card">
@@ -724,26 +781,26 @@
         // Pastel color palette for floating hearts
         const pastelColors = ['#ffb7c5', '#a2d2ff', '#cdb4db', '#ffd6ff', '#ffafcc', '#bde0fe', '#ffc8dd'];
         
-        // Photo URLs - ALL YOUR PHOTOS CONVERTED
-const photoUrls = [
-    // Photo 1
-    'https://drive.google.com/thumbnail?id=1h27-8u9ossXk6XooThRhajwcnsBQZTvl&sz=w1000',
-    
-    // Photo 2
-    'https://drive.google.com/thumbnail?id=1NALChwQacTTS-5OL5z1utkZv1f78HLOC&sz=w1000',
-    
-    // Photo 3
-    'https://drive.google.com/thumbnail?id=1Hx4rI4LK0Sk7uN6Hv5TO22_YCrE-EEPk&sz=w1000',
-    
-    // Photo 4
-    'https://drive.google.com/thumbnail?id=1tHdzBx5DAQ48xmefviJ0a8ePmtjlKI_q&sz=w1000',
-    
-    // Photo 5
-    'https://drive.google.com/thumbnail?id=1vzqvaHIDgfgKCtejhLf-GSGDA9PeMGQK&sz=w1000',
-    
-    // Photo 6
-    'https://drive.google.com/thumbnail?id=1-DkCqJzzX3HdZ8P5DzsoR_zVc3b89dUE&sz=w1000'
-];
+        // Photo URLs - YOUR GOOGLE DRIVE PHOTOS
+        const photoUrls = [
+            // Photo 1
+            'https://drive.google.com/thumbnail?id=1h27-8u9ossXk6XooThRhajwcnsBQZTvl&sz=w1000',
+            
+            // Photo 2
+            'https://drive.google.com/thumbnail?id=1NALChwQacTTS-5OL5z1utkZv1f78HLOC&sz=w1000',
+            
+            // Photo 3
+            'https://drive.google.com/thumbnail?id=1Hx4rI4LK0Sk7uN6Hv5TO22_YCrE-EEPk&sz=w1000',
+            
+            // Photo 4
+            'https://drive.google.com/thumbnail?id=1tHdzBx5DAQ48xmefviJ0a8ePmtjlKI_q&sz=w1000',
+            
+            // Photo 5
+            'https://drive.google.com/thumbnail?id=1vzqvaHIDgfgKCtejhLf-GSGDA9PeMGQK&sz=w1000',
+            
+            // Photo 6
+            'https://drive.google.com/thumbnail?id=1-DkCqJzzX3HdZ8P5DzsoR_zVc3b89dUE&sz=w1000'
+        ];
         
         // Create floating hearts in background
         function createFloatingHearts() {
@@ -786,7 +843,7 @@ const photoUrls = [
             }
         }
         
-        // FIXED: Simple and reliable swipe function
+        // Mobile-friendly card swiping
         function initCardSwiping() {
             const cards = document.querySelectorAll('.distraction-card');
             let isDragging = false;
@@ -800,37 +857,31 @@ const photoUrls = [
                 isDragging = true;
                 currentCardElement.style.cursor = 'grabbing';
                 
-                // Get starting position
                 if (e.type === 'mousedown') {
                     startX = e.clientX;
                 } else if (e.type === 'touchstart') {
                     startX = e.touches[0].clientX;
                 }
                 
-                // Prevent default touch behavior
                 e.preventDefault();
             };
             
             const drag = (e) => {
                 if (!isDragging || !currentCardElement) return;
                 
-                // Get current position
                 if (e.type === 'mousemove') {
                     currentX = e.clientX;
                 } else if (e.type === 'touchmove') {
                     currentX = e.touches[0].clientX;
                 }
                 
-                // Calculate drag distance
                 const dx = currentX - startX;
                 
-                // Apply transformation based on drag distance
                 if (Math.abs(dx) > 10) {
                     currentCardElement.style.transform = `translateX(${dx}px) rotate(${-2 + dx/30}deg)`;
                     currentCardElement.style.transition = 'none';
                 }
                 
-                // Prevent page scroll
                 e.preventDefault();
             };
             
@@ -842,34 +893,31 @@ const photoUrls = [
                 
                 const dx = currentX - startX;
                 
-                // Check if card was dragged enough to swipe away
                 if (Math.abs(dx) > 80) {
-                    // Swipe away
                     currentCardElement.classList.add('swiped');
                     currentCardElement.style.transform = `translateX(${dx > 0 ? 1000 : -1000}px) rotate(${dx > 0 ? 25 : -25}deg)`;
                     currentCardElement.style.transition = 'transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
                     
-                    // Move to next card
                     currentCard++;
-                    
-                    // Update current card element
                     currentCardElement = document.getElementById('card' + currentCard);
                     
-                    // If all cards are swiped, reveal gift
                     if (currentCard > 6) {
                         setTimeout(() => {
                             giftContainer.classList.add('revealed');
+                            // Scroll to gift box on mobile
+                            if (window.innerWidth <= 768) {
+                                giftContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            }
                         }, 600);
                     }
                 } else {
-                    // Return to original position
                     const cardIndex = parseInt(currentCardElement.id.replace('card', ''));
                     currentCardElement.style.transform = `rotate(${-2*cardIndex}deg)`;
                     currentCardElement.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
                 }
             };
             
-            // Add event listeners to the stack container
+            // Add event listeners
             distractionsStack.addEventListener('mousedown', startDrag);
             distractionsStack.addEventListener('touchstart', startDrag, { passive: false });
             
@@ -897,7 +945,6 @@ const photoUrls = [
                 
                 photoFrame.addEventListener('click', () => {
                     if (!photoFrame.classList.contains('fading')) {
-                        // Add fade out animation
                         photoFrame.classList.add('fading');
                         photosClicked++;
                         
@@ -918,7 +965,6 @@ const photoUrls = [
                             }, j * 100);
                         }
                         
-                        // If all photos are clicked, show final screen
                         if (photosClicked >= totalPhotos) {
                             setTimeout(() => {
                                 showScreen('screen5');
@@ -995,7 +1041,6 @@ const photoUrls = [
                     heart.style.zIndex = '1000';
                     heart.style.animation = 'none';
                     
-                    // Custom explosion animation
                     const angle = Math.random() * Math.PI * 2;
                     const distance = 200 + Math.random() * 300;
                     const x = Math.cos(angle) * distance;
@@ -1052,6 +1097,13 @@ const photoUrls = [
         if ('ontouchstart' in window) {
             document.querySelector('.instructions').innerHTML = "Touch & hold my heart for 3 seconds 💖";
         }
+        
+        // Mobile optimization
+        window.addEventListener('resize', function() {
+            if (window.innerWidth <= 768) {
+                document.querySelector('.distractions-stack').style.height = '280px';
+            }
+        });
     </script>
 </body>
 </html>
