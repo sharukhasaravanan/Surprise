@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My New Year Surprise for You ❤️</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            height: 100%;
+            position: fixed;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #ffe6f2 0%, #e6f7ff 50%, #f0e6ff 100%);
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            color: #5a5560;
+            touch-action: none;
+        }
+        
+        .screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 30px 20px;
+            text-align: center;
+            transition: opacity 0.8s ease;
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.8rem;
+            margin-bottom: 25px;
+            background: linear-gradient(45deg, #ff85a2, #ffafcc, #a2d2ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 4px 15px rgba(255, 133, 162, 0.2);
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #ff85a2;
+            font-weight: 700;
+        }
+        
+        p {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            max-width: 800px;
+            line-height: 1.8;
+            color: #6d6875;
+            font-weight: 300;
+        }
+        
+        /* Floating hearts in background */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .floating-heart {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0.3;
+            animation: float-around 15s linear infinite;
+        }
+        
+        /* Heart Button */
+        .heart-container {
+            margin: 50px 0;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .heart-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 6.5rem;
+            color: #ff85a2;
+            animation: heartbeat 1.2s infinite;
+            transition: all 0.3s;
+            filter: drop-shadow(0 5px 15px rgba(255, 133, 162, 0.3));
+        }
+        
+        .heart-btn:hover {
+            transform: scale(1.15);
+        }
+        
+        .heart-btn.held {
+            animation: explode 0.8s forwards;
+        }
+        
+        .instructions {
+            font-size: 1.2rem;
+            margin-top: 20px;
+            color: #a2d2ff;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Distractions Stack - FIXED SWIPE */
+        .distractions-stack {
+            position: relative;
+            width: 90%;
+            max-width: 500px;
+            height: 400px;
+            margin: 40px 0;
+            perspective: 1000px;
+        }
+        
+        .distraction-card {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: grab;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            z-index: 1;
+            touch-action: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .distraction-card:active {
+            cursor: grabbing;
+        }
+        
+        .distraction-card.swiped {
+            transform: translateX(-100vw) rotate(-20deg);
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .distraction-icon {
+            font-size: 4rem;
+            margin-bottom: 25px;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .distraction-text {
+            font-size: 2.2rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+        
+        /* Card Colors */
+        .card-1 {
+            background: linear-gradient(135deg, #ffccd5, #ffb7c5);
+            top: 0;
+            z-index: 6;
+        }
+        
+        .card-2 {
+            background: linear-gradient(135deg, #bde0fe, #a2d2ff);
+            top: 10px;
+            transform: rotate(-2deg);
+            z-index: 5;
+        }
+        
+        .card-3 {
+            background: linear-gradient(135deg, #cdb4db, #b8c0ff);
+            top: 20px;
+            transform: rotate(-4deg);
+            z-index: 4;
+        }
+        
+        .card-4 {
+            background: linear-gradient(135deg, #ffd6ff, #e7c6ff);
+            top: 30px;
+            transform: rotate(-6deg);
+            z-index: 3;
+        }
+        
+        .card-5 {
+            background: linear-gradient(135deg, #ffafcc, #ffc8dd);
+            top: 40px;
+            transform: rotate(-8deg);
+            z-index: 2;
+        }
+        
+        .card-6 {
+            background: linear-gradient(135deg, #a2d2ff, #bde0fe);
+            top: 50px;
+            transform: rotate(-10deg);
+            z-index: 1;
+        }
+        
+        /* Gift Box */
+        .gift-container {
+            margin: 50px 0;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .gift-container.revealed {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .gift-box {
+            font-size: 6rem;
+            color: #ff85a2;
+            cursor: pointer;
+            animation: bounce 2s infinite, sparkle 3s infinite;
+            filter: drop-shadow(0 5px 15px rgba(255, 133, 162, 0.4));
+        }
+        
+        .gift-label {
+            font-size: 1.3rem;
+            margin-top: 20px;
+            color: #6d6875;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 10px 25px;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Golden Ticket */
+        .ticket-container {
+            width: 90%;
+            max-width: 600px;
+            margin: 30px 0;
+        }
+        
+        .ticket {
+            background: linear-gradient(135deg, #fff9c4, #fff59d);
+            border-radius: 25px;
+            padding: 40px;
+            color: #8d6e63;
+            box-shadow: 0 15px 35px rgba(255, 204, 128, 0.2);
+            margin: 30px 0;
+            border: 3px solid #ffd54f;
+            position: relative;
+            overflow: hidden;
+            transform: rotate(-1deg);
+        }
+        
+        .ticket:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: repeating-linear-gradient(45deg, #ffd54f, #ffd54f 10px, #fff9c4 10px, #fff9c4 20px);
+        }
+        
+        .ticket h2 {
+            color: #ff9800;
+            font-size: 2.8rem;
+            margin-bottom: 25px;
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .ticket-details {
+            text-align: left;
+            margin: 30px 0;
+            font-size: 1.3rem;
+            line-height: 1.9;
+        }
+        
+        .ticket-details li {
+            margin-bottom: 15px;
+            list-style-type: none;
+            padding-left: 40px;
+            position: relative;
+            padding-top: 5px;
+        }
+        
+        .ticket-details li:before {
+            content: "✨";
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+        }
+        
+        .claim-btn {
+            background: linear-gradient(135deg, #ff85a2, #ffafcc);
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            font-size: 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            box-shadow: 0 10px 20px rgba(255, 133, 162, 0.3);
+            letter-spacing: 1px;
+        }
+        
+        .claim-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(255, 133, 162, 0.4);
+        }
+        
+        /* Photo Gallery */
+        .gallery-container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 40px 0;
+        }
+        
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .photo-frame {
+            width: 200px;
+            height: 200px;
+            border-radius: 20px;
+            background: white;
+            padding: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .photo-frame:hover {
+            transform: translateY(-10px) rotate(2deg);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .photo-frame.fading {
+            animation: fadeOut 0.8s forwards;
+        }
+        
+        .photo {
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .photo-frame:hover .photo {
+            transform: scale(1.05);
+        }
+        
+        /* New Year Card - YOUR MESSAGE HERE */
+        .card-container {
+            width: 90%;
+            max-width: 600px;
+            margin: 30px 0;
+        }
+        
+        .new-year-card {
+            background: linear-gradient(135deg, #ffffff, #f8f7ff);
+            border-radius: 30px;
+            padding: 50px 40px;
+            box-shadow: 0 20px 40px rgba(162, 210, 255, 0.2);
+            border: 3px solid #ffafcc;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .new-year-card:before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 175, 204, 0.1) 0%, transparent 70%);
+            z-index: 0;
+        }
+        
+        .new-year-card h2 {
+            font-size: 3.5rem;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .card-message {
+            font-size: 1.5rem;
+            line-height: 1.9;
+            margin-bottom: 40px;
+            text-align: left;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 20px;
+            position: relative;
+            z-index: 1;
+            border-left: 5px solid #ffafcc;
+        }
+        
+        .signature {
+            font-size: 2rem;
+            color: #ff85a2;
+            margin-top: 50px;
+            font-family: 'Dancing Script', cursive;
+            position: relative;
+            z-index: 1;
+            text-align: right;
+        }
+        
+        .replay-btn {
+            background: linear-gradient(135deg, #a2d2ff, #b8c0ff);
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            font-size: 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 40px;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            box-shadow: 0 10px 20px rgba(162, 210, 255, 0.3);
+        }
+        
+        .replay-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(162, 210, 255, 0.4);
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+        
+        @keyframes explode {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.7; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+        
+        @keyframes float-around {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-25px); }
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { filter: drop-shadow(0 5px 15px rgba(255, 133, 162, 0.4)); }
+            50% { filter: drop-shadow(0 5px 25px rgba(255, 133, 162, 0.7)); }
+        }
+        
+        @keyframes fadeOut {
+            0% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0.5); }
+        }
+        
+        /* Cute decorations */
+        .decoration {
+            position: absolute;
+            font-size: 2rem;
+            z-index: 0;
+            opacity: 0.6;
+        }
+        
+        .star {
+            color: #ffd166;
+            animation: spin 10s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Progress indicator */
+        .progress-dots {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ffafcc;
+            opacity: 0.3;
+            transition: all 0.3s;
+        }
+        
+        .dot.active {
+            opacity: 1;
+            transform: scale(1.3);
+            background: #ff85a2;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.8rem; }
+            h2 { font-size: 2rem; }
+            p { font-size: 1.2rem; }
+            .distractions-stack { height: 350px; }
+            .distraction-text { font-size: 1.8rem; }
+            .distraction-icon { font-size: 3rem; }
+            .photo-frame { width: 160px; height: 160px; }
+            .new-year-card { padding: 30px 20px; }
+            .card-message { font-size: 1.3rem; padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating background hearts -->
+    <div class="floating-hearts" id="floatingHearts"></div>
+    
+    <!-- Cute decorations -->
+    <div class="decoration" style="top: 10%; left: 5%;">🌸</div>
+    <div class="decoration" style="top: 15%; right: 8%;">✨</div>
+    <div class="decoration star" style="bottom: 20%; left: 10%;">⭐</div>
+    <div class="decoration" style="bottom: 15%; right: 5%;">🎀</div>
+    <div class="decoration" style="top: 30%; left: 15%;">💖</div>
+    
+    <!-- Progress dots -->
+    <div class="progress-dots" id="progressDots">
+        <div class="dot active" data-screen="1"></div>
+        <div class="dot" data-screen="2"></div>
+        <div class="dot" data-screen="3"></div>
+        <div class="dot" data-screen="4"></div>
+        <div class="dot" data-screen="5"></div>
+    </div>
+    
+    <!-- Screen 1: Initial Surprise -->
+    <div class="screen" id="screen1">
+        <h1>My Precious Surprise for You 💝</h1>
+        <p>Before this magical year begins, I have something special wrapped in love for you...</p>
+        <div class="heart-container">
+            <button class="heart-btn" id="heartBtn">
+                <i class="fas fa-heart"></i>
+            </button>
+            <p class="instructions">Hold my heart for 3 seconds 💖</p>
+        </div>
+        <p>Something beautiful is waiting just for you...</p>
+    </div>
+    
+    <!-- Screen 2: Distractions Stack - FIXED SWIPE -->
+    <div class="screen hidden" id="screen2">
+        <h2>Swipe Away the Clouds 🌈</h2>
+        <p>Swipe each card away to clear the path to your surprise</p>
+        
+        <div class="distractions-stack" id="distractionsStack">
+            <div class="distraction-card card-1" id="card1">
+                <div class="distraction-icon">☁️</div>
+                <div class="distraction-text">Stress</div>
+            </div>
+            <div class="distraction-card card-2" id="card2">
+                <div class="distraction-icon">⚡</div>
+                <div class="distraction-text">Fights</div>
+            </div>
+            <div class="distraction-card card-3" id="card3">
+                <div class="distraction-icon">🌧️</div>
+                <div class="distraction-text">Bad Days</div>
+            </div>
+            <div class="distraction-card card-4" id="card4">
+                <div class="distraction-icon">↔️</div>
+                <div class="distraction-text">Distance</div>
+            </div>
+            <div class="distraction-card card-5" id="card5">
+                <div class="distraction-icon">😔</div>
+                <div class="distraction-text">Worries</div>
+            </div>
+            <div class="distraction-card card-6" id="card6">
+                <div class="distraction-icon">❓</div>
+                <div class="distraction-text">Doubts</div>
+            </div>
+        </div>
+        
+        <div class="gift-container" id="giftContainer">
+            <div class="gift-box" id="giftBox">
+                <i class="fas fa-gift"></i>
+            </div>
+            <p class="gift-label">Open your gift! 🎁</p>
+        </div>
+    </div>
+    
+    <!-- Screen 3: Golden Ticket -->
+    <div class="screen hidden" id="screen3">
+        <h2>Your Magical Gift! ✨</h2>
+        <div class="ticket-container">
+            <div class="ticket">
+                <h2>✨ Golden Ticket of Love ✨</h2>
+                <p><strong style="color: #ff9800; font-size: 1.6rem;">Valid for every year ahead, forever and always</strong></p>
+                <div class="ticket-details">
+                    <ul>
+                        <li><strong>Unlimited Cuddles</strong> - Whenever you need them</li>
+                        <li><strong>Endless Laughter</strong> - For all our silly moments</li>
+                        <li><strong>Infinite Patience</strong> - Through thick and thin</li>
+                        <li><strong>Priority Kisses</strong> - You're always first in line</li>
+                        <li><strong>Forever Support</strong> - I'll always be your biggest fan</li>
+                        <li><strong>Lifetime Adventure</strong> - Let's explore the world together</li>
+                    </ul>
+                </div>
+                <p style="font-style: italic; color: #ff9800; font-size: 1.4rem;">This ticket never expires, and my love only grows stronger 💕</p>
+                <button class="claim-btn" id="claimBtn">Claim Your Forever Ticket 💖</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Screen 4: Photo Gallery -->
+    <div class="screen hidden" id="screen4">
+        <h2>Our Beautiful Memories 📸</h2>
+        <p>Touch each photo to continue our love story...</p>
+        <div class="gallery-container">
+            <div class="gallery" id="gallery">
+                <!-- Photos will be added here -->
+            </div>
+        </div>
+        <p id="photoInstructions" style="color: #ff85a2; font-weight: 500;">Touch all the photos to continue 💕</p>
+    </div>
+    
+    <!-- Screen 5: New Year Card - YOUR MESSAGE HERE -->
+    <div class="screen hidden" id="screen5">
+        <div class="card-container">
+            <div class="new-year-card">
+                <h2>Happy New Year, My Love! 🎊💕</h2>
+                <div class="card-message">
+                    <p>Dear Babe,</p>
+                    <p>I love you so much!!! 💖</p>
+                    <p>I wish this year 2026 be our best one and I hope we get to see each other more often and create more memories together. ✨</p>
+                    <p>Please don't hate me coz you are the only one that I love. And sometimes my love may feel burden for you I'm sorry for all of that. 😔</p>
+                    <p>Please show me love, please don't hate me. 🙏</p>
+                    <p>I love you more than all the stars in the sky and more than all the waves in the ocean. 🌟🌊</p>
+                </div>
+                <div class="signature">
+                    Sharukha ♥️ Mathan forever ♾️💕
+                </div>
+            </div>
+        </div>
+        <button class="replay-btn" id="replayBtn">Relive Our Magic Again ✨</button>
+    </div>
+
+    <script>
+        // DOM Elements
+        const screens = document.querySelectorAll('.screen');
+        const heartBtn = document.getElementById('heartBtn');
+        const giftBox = document.getElementById('giftBox');
+        const giftContainer = document.getElementById('giftContainer');
+        const claimBtn = document.getElementById('claimBtn');
+        const gallery = document.getElementById('gallery');
+        const replayBtn = document.getElementById('replayBtn');
+        const progressDots = document.querySelectorAll('.dot');
+        const floatingHearts = document.getElementById('floatingHearts');
+        const distractionsStack = document.getElementById('distractionsStack');
+        
+        // State variables
+        let heartHoldTimer;
+        let currentCard = 1;
+        let photosClicked = 0;
+        const totalPhotos = 6;
+        
+        // Pastel color palette for floating hearts
+        const pastelColors = ['#ffb7c5', '#a2d2ff', '#cdb4db', '#ffd6ff', '#ffafcc', '#bde0fe', '#ffc8dd'];
+        
+        // Photo URLs - ALL YOUR PHOTOS CONVERTED
+const photoUrls = [
+    // Photo 1
+    'https://drive.google.com/thumbnail?id=1h27-8u9ossXk6XooThRhajwcnsBQZTvl&sz=w1000',
+    
+    // Photo 2
+    'https://drive.google.com/thumbnail?id=1NALChwQacTTS-5OL5z1utkZv1f78HLOC&sz=w1000',
+    
+    // Photo 3
+    'https://drive.google.com/thumbnail?id=1Hx4rI4LK0Sk7uN6Hv5TO22_YCrE-EEPk&sz=w1000',
+    
+    // Photo 4
+    'https://drive.google.com/thumbnail?id=1tHdzBx5DAQ48xmefviJ0a8ePmtjlKI_q&sz=w1000',
+    
+    // Photo 5
+    'https://drive.google.com/thumbnail?id=1vzqvaHIDgfgKCtejhLf-GSGDA9PeMGQK&sz=w1000',
+    
+    // Photo 6
+    'https://drive.google.com/thumbnail?id=1-DkCqJzzX3HdZ8P5DzsoR_zVc3b89dUE&sz=w1000'
+];
+        
+        // Create floating hearts in background
+        function createFloatingHearts() {
+            for (let i = 0; i < 25; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.innerHTML = '💖';
+                heart.style.left = `${Math.random() * 100}%`;
+                heart.style.color = pastelColors[Math.floor(Math.random() * pastelColors.length)];
+                heart.style.animationDelay = `${Math.random() * 15}s`;
+                heart.style.fontSize = `${Math.random() * 1.5 + 1}rem`;
+                floatingHearts.appendChild(heart);
+            }
+        }
+        
+        // Update progress dots
+        function updateProgress(screenNumber) {
+            progressDots.forEach(dot => {
+                dot.classList.remove('active');
+                if (parseInt(dot.dataset.screen) === screenNumber) {
+                    dot.classList.add('active');
+                }
+            });
+        }
+        
+        // Switch between screens with progress update
+        function showScreen(screenId) {
+            screens.forEach(screen => {
+                screen.classList.add('hidden');
+            });
+            document.getElementById(screenId).classList.remove('hidden');
+            
+            // Update progress dots
+            const screenNumber = parseInt(screenId.replace('screen', ''));
+            updateProgress(screenNumber);
+            
+            // Create floating hearts on first load
+            if (screenNumber === 1 && floatingHearts.children.length === 0) {
+                createFloatingHearts();
+            }
+        }
+        
+        // FIXED: Simple and reliable swipe function
+        function initCardSwiping() {
+            const cards = document.querySelectorAll('.distraction-card');
+            let isDragging = false;
+            let startX = 0;
+            let currentX = 0;
+            let currentCardElement = document.getElementById('card' + currentCard);
+            
+            const startDrag = (e) => {
+                if (!currentCardElement || currentCard > 6) return;
+                
+                isDragging = true;
+                currentCardElement.style.cursor = 'grabbing';
+                
+                // Get starting position
+                if (e.type === 'mousedown') {
+                    startX = e.clientX;
+                } else if (e.type === 'touchstart') {
+                    startX = e.touches[0].clientX;
+                }
+                
+                // Prevent default touch behavior
+                e.preventDefault();
+            };
+            
+            const drag = (e) => {
+                if (!isDragging || !currentCardElement) return;
+                
+                // Get current position
+                if (e.type === 'mousemove') {
+                    currentX = e.clientX;
+                } else if (e.type === 'touchmove') {
+                    currentX = e.touches[0].clientX;
+                }
+                
+                // Calculate drag distance
+                const dx = currentX - startX;
+                
+                // Apply transformation based on drag distance
+                if (Math.abs(dx) > 10) {
+                    currentCardElement.style.transform = `translateX(${dx}px) rotate(${-2 + dx/30}deg)`;
+                    currentCardElement.style.transition = 'none';
+                }
+                
+                // Prevent page scroll
+                e.preventDefault();
+            };
+            
+            const stopDrag = (e) => {
+                if (!isDragging || !currentCardElement) return;
+                
+                isDragging = false;
+                currentCardElement.style.cursor = 'grab';
+                
+                const dx = currentX - startX;
+                
+                // Check if card was dragged enough to swipe away
+                if (Math.abs(dx) > 80) {
+                    // Swipe away
+                    currentCardElement.classList.add('swiped');
+                    currentCardElement.style.transform = `translateX(${dx > 0 ? 1000 : -1000}px) rotate(${dx > 0 ? 25 : -25}deg)`;
+                    currentCardElement.style.transition = 'transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                    
+                    // Move to next card
+                    currentCard++;
+                    
+                    // Update current card element
+                    currentCardElement = document.getElementById('card' + currentCard);
+                    
+                    // If all cards are swiped, reveal gift
+                    if (currentCard > 6) {
+                        setTimeout(() => {
+                            giftContainer.classList.add('revealed');
+                        }, 600);
+                    }
+                } else {
+                    // Return to original position
+                    const cardIndex = parseInt(currentCardElement.id.replace('card', ''));
+                    currentCardElement.style.transform = `rotate(${-2*cardIndex}deg)`;
+                    currentCardElement.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                }
+            };
+            
+            // Add event listeners to the stack container
+            distractionsStack.addEventListener('mousedown', startDrag);
+            distractionsStack.addEventListener('touchstart', startDrag, { passive: false });
+            
+            document.addEventListener('mousemove', drag);
+            document.addEventListener('touchmove', drag, { passive: false });
+            
+            document.addEventListener('mouseup', stopDrag);
+            document.addEventListener('touchend', stopDrag);
+        }
+        
+        // Initialize photo gallery
+        function initGallery() {
+            gallery.innerHTML = '';
+            
+            for (let i = 0; i < totalPhotos; i++) {
+                const photoFrame = document.createElement('div');
+                photoFrame.className = 'photo-frame';
+                
+                const img = document.createElement('img');
+                img.className = 'photo';
+                img.src = photoUrls[i % photoUrls.length];
+                img.alt = `Memory ${i + 1}`;
+                
+                photoFrame.appendChild(img);
+                
+                photoFrame.addEventListener('click', () => {
+                    if (!photoFrame.classList.contains('fading')) {
+                        // Add fade out animation
+                        photoFrame.classList.add('fading');
+                        photosClicked++;
+                        
+                        // Add sparkle effect
+                        for (let j = 0; j < 5; j++) {
+                            setTimeout(() => {
+                                const sparkle = document.createElement('div');
+                                sparkle.className = 'floating-heart';
+                                sparkle.innerHTML = '✨';
+                                sparkle.style.left = `${Math.random() * 100}%`;
+                                sparkle.style.top = `${Math.random() * 100}%`;
+                                sparkle.style.position = 'absolute';
+                                sparkle.style.fontSize = '1.2rem';
+                                sparkle.style.animationDuration = '1s';
+                                photoFrame.appendChild(sparkle);
+                                
+                                setTimeout(() => sparkle.remove(), 1000);
+                            }, j * 100);
+                        }
+                        
+                        // If all photos are clicked, show final screen
+                        if (photosClicked >= totalPhotos) {
+                            setTimeout(() => {
+                                showScreen('screen5');
+                            }, 1000);
+                        }
+                    }
+                });
+                
+                gallery.appendChild(photoFrame);
+            }
+        }
+        
+        // Event Listeners
+        heartBtn.addEventListener('mousedown', () => {
+            heartHoldTimer = setTimeout(() => {
+                heartBtn.classList.add('held');
+                setTimeout(() => {
+                    showScreen('screen2');
+                    initCardSwiping();
+                }, 800);
+            }, 3000);
+        });
+        
+        heartBtn.addEventListener('touchstart', () => {
+            heartHoldTimer = setTimeout(() => {
+                heartBtn.classList.add('held');
+                setTimeout(() => {
+                    showScreen('screen2');
+                    initCardSwiping();
+                }, 800);
+            }, 3000);
+        });
+        
+        heartBtn.addEventListener('mouseup', () => clearTimeout(heartHoldTimer));
+        heartBtn.addEventListener('mouseleave', () => clearTimeout(heartHoldTimer));
+        heartBtn.addEventListener('touchend', () => clearTimeout(heartHoldTimer));
+        
+        giftBox.addEventListener('click', () => {
+            // Add sparkle effect
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.className = 'floating-heart';
+                    sparkle.innerHTML = '✨';
+                    sparkle.style.left = `${Math.random() * 100}%`;
+                    sparkle.style.top = `${Math.random() * 100}%`;
+                    sparkle.style.position = 'fixed';
+                    sparkle.style.fontSize = '2rem';
+                    sparkle.style.zIndex = '1000';
+                    sparkle.style.animationDuration = '2s';
+                    document.body.appendChild(sparkle);
+                    
+                    setTimeout(() => sparkle.remove(), 2000);
+                }, i * 100);
+            }
+            
+            setTimeout(() => {
+                showScreen('screen3');
+            }, 1200);
+        });
+        
+        claimBtn.addEventListener('click', () => {
+            // Add heart explosion
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'floating-heart';
+                    heart.innerHTML = '💖';
+                    heart.style.left = '50%';
+                    heart.style.top = '50%';
+                    heart.style.position = 'fixed';
+                    heart.style.color = pastelColors[Math.floor(Math.random() * pastelColors.length)];
+                    heart.style.fontSize = '2rem';
+                    heart.style.zIndex = '1000';
+                    heart.style.animation = 'none';
+                    
+                    // Custom explosion animation
+                    const angle = Math.random() * Math.PI * 2;
+                    const distance = 200 + Math.random() * 300;
+                    const x = Math.cos(angle) * distance;
+                    const y = Math.sin(angle) * distance;
+                    
+                    heart.animate([
+                        { transform: 'translate(-50%, -50%) scale(1)', opacity: 1 },
+                        { transform: `translate(${x}px, ${y}px) scale(0)`, opacity: 0 }
+                    ], {
+                        duration: 1500,
+                        easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+                    });
+                    
+                    document.body.appendChild(heart);
+                    setTimeout(() => heart.remove(), 1500);
+                }, i * 50);
+            }
+            
+            setTimeout(() => {
+                showScreen('screen4');
+                initGallery();
+            }, 1000);
+        });
+        
+        replayBtn.addEventListener('click', () => {
+            // Reset everything
+            currentCard = 1;
+            photosClicked = 0;
+            
+            // Reset cards
+            const cards = document.querySelectorAll('.distraction-card');
+            cards.forEach((card, index) => {
+                card.classList.remove('swiped');
+                card.style.transform = `rotate(${-2*index}deg)`;
+                card.style.transition = 'transform 0.5s';
+            });
+            
+            // Hide gift
+            giftContainer.classList.remove('revealed');
+            
+            // Reset heart button
+            heartBtn.classList.remove('held');
+            
+            // Go to first screen
+            showScreen('screen1');
+        });
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            showScreen('screen1');
+        });
+        
+        // Touch device instructions
+        if ('ontouchstart' in window) {
+            document.querySelector('.instructions').innerHTML = "Touch & hold my heart for 3 seconds 💖";
+        }
+    </script>
+</body>
+</html>
+    
+  </body>
+  
+</html>
